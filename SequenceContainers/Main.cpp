@@ -65,9 +65,8 @@ void main()
 		i_vec.insert(i_vec.begin() + index, value);
 
 	cout << "Введите индекс удаляемого элемента: "; cin >> index;
-	cout << "Введите значение удаляемого элемента: "; cin >> value;
 	if(index < i_vec.size())
-		i_vec.erase(i_vec.end() - index);
+		i_vec.erase(i_vec.begin() + index);
 
 	for (std::vector<int>::iterator it = i_vec.begin(); it != i_vec.end(); ++it)
 	{
@@ -85,6 +84,7 @@ void main()
 		cout << i_deque[i] << tab;
 	}
 	cout << endl;
+	cout << endl;
 	i_deque.push_front(1);
 	i_deque.push_front(1);
 	i_deque.push_front(0);
@@ -96,6 +96,17 @@ void main()
 		cout << *it << tab;
 	}
 	cout << endl;
+
+	int index;
+	int value;
+	cout << "Введите индекс добавляемого односвязного элемента: "; cin >> index;
+	cout << "Введите значение добавляемого односвязного элемента: "; cin >> value;
+	if (index <= i_deque.size())
+		i_deque.insert(i_deque.begin() + index, value);
+
+	cout << "Введите индекс удаляемого односвязного элемента: "; cin >> index;
+	if (index < i_deque.size())
+		i_deque.erase(i_deque.begin() + index);
 
 #endif // STL_DEQUE
 
