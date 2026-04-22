@@ -2,6 +2,9 @@
 #include<array>
 #include<vector>
 #include<deque>
+#include<list>
+#include<iterator>
+#include<forward_list>
 using std::cin;
 using std::cout;
 using std::endl;
@@ -15,10 +18,16 @@ template<typename T> void vector_properties(const std::vector<T>& vec)
 	cout << "Capacity:" << vec.capacity() << endl;	
 	cout << "MaxSize: " << vec.max_size() << endl;		//максимальный-возможный размер.
 }
+bool less_then_10(const int value)
+{
+	return value < 10;
+}
 
 //#define STL_ARRAY
 //#define STL_VECTOR
-#define STL_DEQUE
+//#define STL_DEQUE
+//#define STL_LIST
+#define STL_FORWARD_LIST
 
 void main()
 {
@@ -110,5 +119,86 @@ void main()
 
 #endif // STL_DEQUE
 
+#ifdef STL_LIST
+
+	std::list<int> i_list = { 3, 5, 8, 13, 21 };
+	/*for (int i = 0; i < i_list.size(); i++)
+	{
+		cout << i_list[i] << tab;
+	}
+	cout << endl;*/
+	for (std::list<int>::iterator it = i_list.begin(); it != i_list.end(); ++it)
+	{
+		cout << *it << tab;
+	}
+	cout << endl;
+	cout << endl;
+	i_list.push_front(1);
+	i_list.push_front(1);
+	i_list.push_front(0);
+
+	i_list.push_back(34);
+	i_list.push_back(35);
+	i_list.push_back(89);
+
+	int index;
+	int value;
+	cout << "Введите индекс добавляемого элемента: "; cin >> index;
+	cout << "Введите значение добавляемого элемента: "; cin >> value;
+	std::list<int>::iterator position = i_list.begin();
+	i_list.insert(position, value);
+	//for (int i = 0; i < index; i++)position++;
+	std::advance(position, index);
+
+	for (int i : i_list)
+	{
+		cout << i << tab;
+	}
+	cout << endl;
+	cout << endl;
+
+	for (std::list<int>::reverse_iterator it = i_list.rbegin(); it != i_list.rend(); ++it)
+	{
+		cout << *it << tab;
+	}
+	cout << endl;
+
+#endif // STL_LIST
+
+#ifdef STL_FORWARD_LIST
+
+	std::forward_list<int> i_flist = { 3, 5, 8, 13, 21 };
+	for (std::forward_list<int>::iterator it = i_flist.begin(); it != i_flist.end(); ++it)
+	{
+		cout << *it << tab;
+	}
+	cout << endl;
+	cout << "Размер списка: " << std::distance(i_flist.begin(), i_flist.end()) << endl;
+	
+	//int index;
+	//int value;
+	//cout << "Введите индекс добавляемого элемента: "; cin >> index;
+	//cout << "Введите значение добавляемого элемента: "; cin >> value;
+	//std::forward_list<int>::iterator position = i_flist.begin();
+	////for (int i = 0; i < index-1; i++)position++;
+	//if (index > 0 && index < std::distance(i_flist.begin(), i_flist.end()))
+	//{
+	//	std::advance(position, index - 1);
+	//	i_flist.insert_after(position, value);
+	//}
+	//i_flist.remove(13);
+	//i_flist.remove_if(less_then_10);
+	/*[]()->void
+	{
+		cout << "Hello Lambda" << endl;
+	};*/
+	i_flist.remove_if([](const int value)->bool {return value % 2==0; });
+	for (int i : i_flist)
+	{
+		cout << i << tab;
+	}
+	cout << endl;
+
+#endif // STL_FORWARD_LIST
 
 }
