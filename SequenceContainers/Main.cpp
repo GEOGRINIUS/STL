@@ -146,9 +146,26 @@ void main()
 	cout << "Введите индекс добавляемого элемента: "; cin >> index;
 	cout << "Введите значение добавляемого элемента: "; cin >> value;
 	std::list<int>::iterator position = i_list.begin();
+	std::advance(position, index);
 	i_list.insert(position, value);
 	//for (int i = 0; i < index; i++)position++;
+
+	for (int i : i_list)
+	{
+		cout << i << tab;
+	}
+	cout << endl;
+	cout << endl;
+
+	for (std::list<int>::reverse_iterator it = i_list.rbegin(); it != i_list.rend(); ++it)
+	{
+		cout << *it << tab;
+	}
+	cout << endl;
+
+	cout << "Введите индекс удаляемого элемента: "; cin >> index;
 	std::advance(position, index);
+	i_list.erase(position);
 
 	for (int i : i_list)
 	{
