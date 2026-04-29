@@ -30,8 +30,7 @@ public:
 
 //#define STL_MAP_1
 //#define STL_SET
-#define STL_MAP_2
-//#define GAI
+//#define STL_MAP_2
 
 void main()
 {
@@ -131,12 +130,5 @@ void main()
 
 
 #endif // STL_MAP_2
-
-#ifdef GAI
-
-
-
-#endif // GAI
-
 
 }
