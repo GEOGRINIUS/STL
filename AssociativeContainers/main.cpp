@@ -2,6 +2,7 @@
 #include<string>
 #include<map>
 #include<set>
+#include<list>
 using std::cin;
 using std::cout;
 using std::endl;
@@ -30,6 +31,7 @@ public:
 //#define STL_MAP_1
 //#define STL_SET
 #define STL_MAP_2
+//#define GAI
 
 void main()
 {
@@ -58,6 +60,12 @@ void main()
 	{
 		cout << it->first << "\t" << it->second << endl;
 	}
+	cout << delimiter << endl;
+
+	for (std::pair<int, std::string> i : weekdays)
+	{
+		cout << i.first << tab << i.second << endl;
+	}
 
 #endif // STL_MAP_1
 
@@ -67,6 +75,11 @@ void main()
 	for (std::set<int>::iterator it = i_set.begin(); it != i_set.end(); ++it)
 	{
 		cout << *it << tab;
+	}
+	cout << endl;
+	for (int i : i_set)
+	{
+		cout << i << tab;
 	}
 	cout << endl;
 
@@ -84,9 +97,46 @@ void main()
 
 #ifdef STL_MAP_2
 
+	std::map<std::string, std::list<std::string>> dictionary =
+	{
+		std::pair<std::string, std::list<std::string>>("Statement", {"Утверждение", "Заявление", "Формулировка"}),
+		{"Space",{"Космос", "пространство", "Пробел"}},
+		{"promise",{"обещание", "песперктива", "Проекция"}},
+		{"accept", {"Принимать", "Допускать", "Соглашаться", "Признавать"}},
+		{"reverse", {"переворачивать", "перевернутый", "обратный", "задний ход"}},
+		//{"", {"", "", "", ""}},
+	};
+
+	for (std::map<std::string, std::list<std::string>>::iterator it = dictionary.begin(); it != dictionary.end(); ++it)
+	{
+		cout << it->first << ":\t";
+		for (std::list<std::string>::iterator r_it = it->second.begin(); r_it != it->second.end(); ++r_it)
+		{
+			cout << *r_it << ",";
+		}
+		cout << endl;
+	}
+	cout << delimiter << endl;
+	for (std::pair<std::string, std::list<std::string>> i : dictionary)
+	{
+		cout << i.first << ":\t";
+		for (std::string j : i.second)
+		{
+			cout << j << ",";
+		}
+		cout << endl;
+	}
+
+	//Range-based for dicionary
 
 
 #endif // STL_MAP_2
+
+#ifdef GAI
+
+
+
+#endif // GAI
 
 
 }
