@@ -7,7 +7,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 #define tab			"\t"
-#define delimiter	"\n-----------------------------------\n"
+#define delimiter	"\n----------------------------------------------------------------------------------------\n"
 
 const std::map<int, std::string> OFFENCES =
 {
@@ -85,6 +85,8 @@ std::ostream& operator<<(std::ostream& os, const Offence& obj)
 		<< OFFENCES.at(obj.get_offence());
 }
 
+void Print(const std::map<std::string, std::list<Offence>>& base);
+
 //#define OFFENCE_CHECK
 
 void main()
@@ -103,7 +105,30 @@ void main()
 
 	std::map<std::string, std::list<Offence>> base =
 	{
-		std::pair<std::string, std::list<Offence>>("a123bb", {Offence("ул. Ленина", "2023.04.29 12:31", 1), Offence("пер. Космический", "2016.11.16 17:30",2) })
+		std::pair<std::string, std::list<Offence>>("a123bb", {Offence("ул. Ленина", "2023.04.29 12:31", 1), Offence("пер. Космический", "2016.11.16 17:30",2) }),
+		std::pair<std::string, std::list<Offence>>("a304bb", {Offence("ул. Октябрьская", "2023.06.29 18:31", 5), Offence("ул. Октябрьская", "2023.06.29 18:45",6) }),
+		std::pair<std::string, std::list<Offence>>("a777bb", {Offence("ул. Парижской Коммуны", "2015.06.16 18:31", 7), Offence("ул. Ленина", "2016.06.29 15:33",3) })
 	};
 
+	Print(base);
+
+}
+
+void Print(const std::map<std::string, std::list<Offence>>& base)
+{
+	for (
+		std::map<std::string, std::list<Offence>>::const_iterator it = base.begin();
+		it != base.end();
+		++it
+		)
+	{
+		cout << it->first << ":\n"; 
+		for (std::list<Offence>::const_iterator of_it = it->second.begin();
+			of_it != it->second.end(); ++of_it
+			)
+		{
+			cout << tab << *of_it << endl;
+		}
+		cout << delimiter << endl;
+	}
 }
