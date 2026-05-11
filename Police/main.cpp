@@ -3,6 +3,7 @@
 #include<list>
 #include<ctime>
 #include<iostream>
+#include<fstream>
 using std::cin;
 using std::cout;
 using std::endl;
@@ -80,12 +81,13 @@ std::ostream& operator<<(std::ostream& os, const Offence& obj)
 {
 	std::string offence_time = obj.get_time();
 	offence_time[offence_time.size() - 1] = 0;
-	return os << offence_time << tab 
-		<< obj.get_location() << tab 
+	return os << offence_time << tab
+		<< obj.get_location() << tab
 		<< OFFENCES.at(obj.get_offence());
 }
 
 void Print(const std::map<std::string, std::list<Offence>>& base);
+void Save(const std::map<std::string, std::list<Offence>>& base, const std::string& filename);
 
 //#define OFFENCE_CHECK
 
@@ -111,6 +113,7 @@ void main()
 	};
 
 	Print(base);
+	Save(base, "base.txt");
 
 }
 
@@ -122,7 +125,7 @@ void Print(const std::map<std::string, std::list<Offence>>& base)
 		++it
 		)
 	{
-		cout << it->first << ":\n"; 
+		cout << it->first << ":\n";
 		for (std::list<Offence>::const_iterator of_it = it->second.begin();
 			of_it != it->second.end(); ++of_it
 			)
@@ -131,4 +134,26 @@ void Print(const std::map<std::string, std::list<Offence>>& base)
 		}
 		cout << delimiter << endl;
 	}
+}
+void Save(const std::map<std::string, std::list<Offence>>& base, const std::string& filename)
+{
+	std::ofstream fout(filename);
+	for (
+		std::map<std::string, std::list<Offence>>::const_iterator it = base.begin();
+		it != base.end();
+		++it
+		)
+	{
+		fout << it->first << ":\n";
+		for (std::list<Offence>::const_iterator of_it = it->second.begin();
+			of_it != it->second.end(); ++of_it
+			)
+		{
+			fout << tab << *of_it << endl;
+		}
+	}
+	fout.close();
+	std::string cmd = "notepad ";
+	cmd += filename;
+	system(cmd.c_str());
 }
