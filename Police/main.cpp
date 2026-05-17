@@ -207,10 +207,11 @@ std::map<std::string, std::list<Offence>> Load(const std::string& filename)
 			std::string license_plate;
 			char all_violations[1024] = {};
 			std::getline(fin, license_plate, ':');
-			fin.getline(all_violations, 1024);
 			if (license_plate.size() < 1)continue;
-			cout << license_plate << endl;
-			cout << all_violations << endl;
+			while(strlen(all_violations)<10)
+				fin.getline(all_violations, 1024);
+			//cout << license_plate << endl;
+			//cout << all_violations << endl;
 			char delimiters[] = ",;";
 			for (char* pch = strtok(all_violations, delimiters); pch; pch = strtok(NULL, delimiters))
 			{
@@ -218,8 +219,9 @@ std::map<std::string, std::list<Offence>> Load(const std::string& filename)
 				Offence violation;
 				s_stream << pch;
 				s_stream >> violation;
+				base[license_plate].push_back(violation);
 			}
-			cout << delimiter << endl;
+			//cout << delimiter << endl;
 
 		}
 	}
