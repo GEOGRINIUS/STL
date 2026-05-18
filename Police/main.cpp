@@ -204,16 +204,18 @@ std::map<std::string, std::list<Offence>> Load(const std::string& filename)
 	{
 		while (!fin.eof())
 		{
-			std::string license_plate;
+			//std::string license_plate;
+			//std::getline(fin, license_plate, ':');
 			char all_violations[1024] = {};
-			std::getline(fin, license_plate, ':');
-			if (license_plate.size() < 1)continue;
-			while(strlen(all_violations)<10)
-				fin.getline(all_violations, 1024);
+			fin.getline(all_violations, 1024, ';');
+			if (strlen(all_violations) < 10)continue;
+			//while(strlen(all_violations)<10)
 			//cout << license_plate << endl;
 			//cout << all_violations << endl;
-			char delimiters[] = ",;";
-			for (char* pch = strtok(all_violations, delimiters); pch; pch = strtok(NULL, delimiters))
+			char delimiters[] = ":,;\n";
+			char* pch = strtok(all_violations, delimiters);
+			std::string license_plate = pch;
+			for (pch=strtok(NULL, delimiters); pch; pch = strtok(NULL, delimiters))
 			{
 				std::stringstream s_stream;
 				Offence violation;
